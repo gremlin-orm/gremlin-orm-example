@@ -1,0 +1,30 @@
+{
+  "name": "gremlin-orm-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/.bin/gulp",
+    "test": "node_modules/.bin/mocha --timeout 10000 test/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^2.3.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.12.4",
+    "gremlin-orm": "^0.1.1",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "memory-cache": "^0.2.0",
+    "mocha": "^2.2.5",
+    "nodemon": "^1.12.1",
+    "path": "^0.12.7",
+    "request": "^2.55.0",
+    "supertest": "^1.0.1",
+    "twit": "^2.2.9",
+    "vinyl-source-stream": "^1.1.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
