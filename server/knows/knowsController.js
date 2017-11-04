@@ -1,16 +1,13 @@
 const Knows = require('./knowsModel');
 const knowsController = {};
 
-knowsController.createPerson = (req, res) => {
-  let props = {};
+knowsController.createKnows = (req, res) => {
   const { inV, outV, props } = req.body;
-  
   Knows.create(outV, inV, props, (err, result) => {
     if (err) {
       console.log('ERROR', err);
       res.send(err);
-    }
-    else {
+    } else {
       res.send(result);
     }
   });
