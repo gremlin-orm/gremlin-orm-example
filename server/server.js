@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json())
 
-
 const personController = require('./person/personController');
+const knowsController = require('./knows/knowsController');
 
 var mcache = require('memory-cache');
 var path = require('path');
@@ -45,6 +45,8 @@ app.get('/', (req, res) => {
 app.post('/people', personController.createPerson);
 
 app.get('/people', cache(10), personController.findPerson);
+
+app.post('/knows', knowsController.createKnows);
 
 app.listen(3000);
 

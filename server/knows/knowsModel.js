@@ -1,6 +1,6 @@
 const g = require('./../db');
 
-const Know = g.define('knows', {
+const Knows = g.defineEdge('knows', {
   rating: {
     type: Number
   },
