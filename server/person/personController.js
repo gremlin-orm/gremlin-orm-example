@@ -44,27 +44,16 @@ personController.findFriends = (req, res) => {
   let depth = 1;
   if (req.query.depth) depth = parseInt(req.query.depth)
 
-  Person.find(props, (err, result) => {
+  Person.find(props).findE(relation, {}, depth, (err, result) => {
     if (err) {
       console.log(err);
-      res.send({'error': err});
+      res.send(err);
     }
     else {
-      let person = result[0];
-      if (!person) res.send({'error': 'Person not found.'});
-      else {
-        person.findE(relation, {}, depth, (e, r) => {
-          if (e) {
-            console.log(e);
-            res.send(e);
-          }
-          else {
-            res.send(r);
-          }
-        })
-      }
+      res.send(result);
     }
   });
+
 }
 
 module.exports = personController;
