@@ -33,4 +33,38 @@ personController.findPerson = (req, res) => {
   })
 };
 
+personController.findFriends = (req, res) => {
+  // localhost:3000/person/friends?key=id&value=<PERSON_ID>&rel=knows
+  let key = 'id';
+  if (req.query.key) key = req.query.key;
+  let value = req.query.value;
+  let relation = req.query.rel;
+  let props = {};
+  props[key] = value;
+  let depth = 1;
+  if (req.query.depth) depth = parseInt(req.query.depth)
+
+  Person.find(props, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send({'error': err});
+    }
+    else {
+      let person = result[0];
+      if (!person) res.send({'error': 'Person not found.'});
+      else {
+        person.findE(relation, {}, depth, (e, r) => {
+          if (e) {
+            console.log(e);
+            res.send(e);
+          }
+          else {
+            res.send(r);
+          }
+        })
+      }
+    }
+  });
+}
+
 module.exports = personController;
