@@ -45,6 +45,7 @@ app.get('/', (req, res) => {
 app.post('/people', personController.createPerson);
 
 app.get('/people', cache(10), personController.findPerson);
+app.get('/person/friends', cache(10), personController.findFriends);
 
 app.post('/knows', knowsController.createKnows);
 
