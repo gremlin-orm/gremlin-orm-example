@@ -14,7 +14,7 @@ personController.createPerson = (req, res) => {
     else {
       res.send(result);
     }
-  })
+  });
 };
 
 personController.findPerson = (req, res) => {
