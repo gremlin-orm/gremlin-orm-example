@@ -4,11 +4,11 @@ const personController = {};
 personController.createPerson = (req, res) => {
   let props = {};
   Object.keys(req.body).forEach(function(key) {
-    props[key] = req.body.key;
+    props[key] = req.body[key];
   });
   Person.create(props, (err, result) => {
     if (err) {
-      console.log(err);
+      console.log('ERROR', err);
       res.send(err);
     }
     else {
@@ -20,7 +20,7 @@ personController.createPerson = (req, res) => {
 personController.findPerson = (req, res) => {
   let search = {};
   Object.keys(req.body).forEach(function(key) {
-    search[key] = req.body.key;
+    search[key] = req.body[key];
   });
   Person.find(search, (err, result) => {
     if (err) {

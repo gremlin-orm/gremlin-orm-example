@@ -42,6 +42,8 @@ app.get('/', (req, res) => {
   res.send('hello')
 });
 
+app.post('/createPerson', personController.createPerson);
+
 app.get('/find', cache(10), personController.findPerson);
 
 app.listen(3000);
