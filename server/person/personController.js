@@ -19,8 +19,8 @@ personController.createPerson = (req, res) => {
 
 personController.findPerson = (req, res) => {
   let search = {};
-  Object.keys(req.body).forEach(function(key) {
-    search[key] = req.body[key];
+  Object.keys(req.query).forEach(function(key) {
+    search[key] = req.query[key];
   });
   Person.find(search, (err, result) => {
     if (err) {
