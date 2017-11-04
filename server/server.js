@@ -49,6 +49,8 @@ app.get('/person/friends', cache(10), personController.findFriends);
 
 app.post('/knows', knowsController.createKnows);
 
+app.delete('/people', personController.deletePerson);
+
 app.listen(3000);
 
 module.exports = app;
