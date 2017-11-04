@@ -48,6 +48,8 @@ app.get('/people', cache(10), personController.findPerson);
 
 app.post('/knows', knowsController.createKnows);
 
+app.delete('/people', personController.deletePerson);
+
 app.listen(3000);
 
 module.exports = app;

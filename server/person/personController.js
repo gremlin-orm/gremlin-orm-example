@@ -33,4 +33,32 @@ personController.findPerson = (req, res) => {
   })
 };
 
+personController.deletePerson = (req, res) => {
+  let id = req.body.id ? null : req.body.id;
+  if (!id) return 'id must be provided';
+  
+  Person.delete(id, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // Gremlin commands:
+  // g.V(id).drop();
+  // g.V().property({name: 'bob'});
+
+  // Sequelize commands:
+  /*
+    Model.destory({
+      where: {
+        // properties/criteria
+      }
+    })
+  */
+}
+
+
 module.exports = personController;
