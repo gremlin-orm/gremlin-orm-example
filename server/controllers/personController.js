@@ -1,4 +1,7 @@
-const Person = require('./personModel');
+const Person = require('./../models/personModel');
+const Software = require('./../models/softwareModel');
+const Uses = require('./../models/usesModel');
+
 const personController = {};
 
 personController.createPerson = (req, res) => {
@@ -32,6 +35,40 @@ personController.findPerson = (req, res) => {
     }
   })
 };
+
+personController.addSoftwareUse = (req, res) => {
+  const personProps = req.body.person;
+  const softwareProps = req.body.software;
+  const usesProps = req.body.uses;
+
+  // console.log("Person.find(personProps)", Person.find(personProps));
+  Person.find(personProps).createE(Uses, usesProps, Software.find(softwareProps), (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      res.send(result);
+    }
+  });
+  // Person.find(personProps, (err, result) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.send({'error': err});
+  //   } else {
+  //     const marko = result;
+  //     Software.find(softwareProps, (err, result) => {
+  //       if (err) {
+  //         console.log(err);
+  //         res.send({'error': err});
+  //       } else {
+  //         const software = result;
+  //         marko.createE('uses', software);
+  //       }
+  //     });
+  //   }
+  // }); 
+}
 
 personController.findFriends = (req, res) => {
   // localhost:3000/person/friends?key=id&value=<PERSON_ID>&rel=knows
