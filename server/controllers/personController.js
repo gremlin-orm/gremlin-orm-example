@@ -68,10 +68,12 @@ personController.addSoftwareUse = (req, res) => {
   const softwareProps = req.body.software;
   const usesProps = req.body.uses;
 
-  // console.log("Person.find(personProps)", Person.find(personProps));
+  if (!(personProps && softwareProps && usesProps)) {
+    res.send( {err: "props are missing"} );
+    return;
+  }
   Person.find(personProps).createE(Uses, usesProps, Software.find(softwareProps), (err, result) => {
     if (err) {
-      console.log(err);
       res.send(err);
     }
     else {
