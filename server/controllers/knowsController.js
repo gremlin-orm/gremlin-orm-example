@@ -1,4 +1,4 @@
-const Knows = require('./knowsModel');
+const Knows = require('./../models/knowsModel');
 const knowsController = {};
 
 knowsController.createKnows = (req, res) => {

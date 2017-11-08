@@ -1,11 +1,11 @@
 const g = require('./../db');
 
 const Knows = g.defineEdge('knows', {
-  rating: {
-    type: Number
+  from: {
+    type: String
   },
-  length: {
-    type: Number
+  since: {
+    type: Date
   }
 });
 
