@@ -1,4 +1,7 @@
-const Person = require('./personModel');
+const Person = require('./../models/personModel');
+const Software = require('./../models/softwareModel');
+const Uses = require('./../models/usesModel');
+
 const personController = {};
 
 personController.createPerson = (req, res) => {
@@ -36,7 +39,7 @@ personController.findPerson = (req, res) => {
 personController.deletePerson = (req, res) => {
   let id = req.body.id ? null : req.body.id;
   if (!id) return 'id must be provided';
-  
+
   Person.delete(id, (err, result) => {
     if (err) {
       console.log(err);
