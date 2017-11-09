@@ -72,7 +72,7 @@ personController.addSoftwareUse = (req, res) => {
     res.send( {err: "props are missing"} );
     return;
   }
-  Person.find(personProps).createE(Uses, usesProps, Software.find(softwareProps), (err, result) => {
+  Person.findAll(personProps).createE(Uses, usesProps, Software.findAll(softwareProps), (err, result) => {
     if (err) {
       res.send(err);
     }
@@ -80,24 +80,30 @@ personController.addSoftwareUse = (req, res) => {
       res.send(result);
     }
   });
-  // Person.find(personProps, (err, result) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.send({'error': err});
-  //   } else {
-  //     const marko = result;
-  //     Software.find(softwareProps, (err, result) => {
-  //       if (err) {
-  //         console.log(err);
-  //         res.send({'error': err});
-  //       } else {
-  //         const software = result;
-  //         marko.createE('uses', software);
-  //       }
-  //     });
-  //   }
-  // });
-  }
+/*
+  Person.find(personProps, (err, result) => {
+    if (err) {
+      res.send({'error': err});
+    } else {
+      const marko = result;
+      Software.find(softwareProps, (err, result) => {
+        if (err) {
+          res.send({'error': err});
+        } else {
+          const software = result;
+          marko.createE(Uses, usesProps, software, (err, result) => {
+            if(err) {
+              res.send({'error': err});
+            } else {
+              res.send(result);
+            }
+          });
+        }
+      });
+    }
+  });
+  */
+}
 
 personController.findFriends = (req, res) => {
   // localhost:3000/person/friends?key=id&value=<PERSON_ID>&rel=knows
