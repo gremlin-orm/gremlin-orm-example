@@ -116,7 +116,7 @@ personController.findFriends = (req, res) => {
   let depth = 1;
   if (req.query.depth) depth = parseInt(req.query.depth)
 
-  Person.find(props).findE(relation, {}, depth, (err, result) => {
+  Person.findAll(props).findE(relation, {}, depth, (err, result) => {
     if (err) {
       console.log(err);
       res.send(err);
@@ -125,6 +125,25 @@ personController.findFriends = (req, res) => {
       res.send(result);
     }
   });
+  // Person.findAll(props, (err, result) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.send(err);
+  //   }
+  //   else {
+  //     let people = result;
+  //     console.log(people);
+  //     people.findE(relation, {}, depth, (err, result) => {
+  //       if (err) {
+  //         console.log(err);
+  //         res.send(err);
+  //       }
+  //       else {
+  //         res.send(result);
+  //       }
+  //     });
+  //   }
+  // });
 
 }
 
