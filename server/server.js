@@ -50,6 +50,8 @@ app.get('/person/friends', cache(10), personController.findFriends);
 
 app.post('/knows', knowsController.createKnows);
 
+app.get('/knows', cache(10), knowsController.findKnows);
+
 app.delete('/people', personController.deletePerson);
 
 app.listen(3000);
