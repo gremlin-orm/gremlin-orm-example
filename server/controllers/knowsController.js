@@ -15,7 +15,7 @@ knowsController.createKnows = (req, res) => {
 
 
 knowsController.findKnows = (req, res) => {
-  const props = Object.assign(req.query);
+  const props = Object.assign({}, req.query);
   Knows.find(props, (err, result) => {
     if (err) {
       console.log('ERROR', err);
