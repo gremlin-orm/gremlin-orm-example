@@ -2,10 +2,10 @@ const g = require('./../db');
 
 const Software = g.define('software', {
   brand: {
-    type: String
+    type: g.STRING  
   },
   type: {
-    type: String
+    type: g.STRING
   } 
 });
 
