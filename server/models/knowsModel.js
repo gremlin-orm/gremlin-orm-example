@@ -2,10 +2,10 @@ const g = require('./../db');
 
 const Knows = g.defineEdge('knows', {
   from: {
-    type: String
+    type: g.STRING
   },
   since: {
-    type: Date
+    type: g.DATE
   }
 });
 

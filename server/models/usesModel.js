@@ -2,10 +2,10 @@ const g = require('./../db');
 
 const Uses = g.defineEdge('uses', {
   expert: {
-    type: Boolean
+    type: g.BOOLEAN
   },
   since: {
-    type: Date
+    type: g.DATE
   }
 });
 
