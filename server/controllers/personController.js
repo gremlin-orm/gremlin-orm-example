@@ -25,7 +25,7 @@ personController.findPerson = (req, res) => {
   Object.keys(req.query).forEach(function(key) {
     search[key] = req.query[key];
   });
-  Person.find(search, (err, result) => {
+  Person.findAll(search, (err, result) => {
     if (err) {
       console.log(err);
       res.send(err);
@@ -68,42 +68,34 @@ personController.addSoftwareUse = (req, res) => {
   const softwareProps = req.body.software;
   const usesProps = req.body.uses;
 
-  if (!(personProps && softwareProps && usesProps)) {
-    res.send( {err: "props are missing"} );
-    return;
-  }
-  Person.findAll(personProps).createE(Uses, usesProps, Software.findAll(softwareProps), (err, result) => {
+  // console.log("Person.find(personProps)", Person.find(personProps));
+  Person.find(personProps).createEdge(Uses, usesProps, Software.find(softwareProps), (err, result) => {
     if (err) {
+      console.log(err);
       res.send(err);
     }
     else {
       res.send(result);
     }
   });
-/*
-  Person.find(personProps, (err, result) => {
-    if (err) {
-      res.send({'error': err});
-    } else {
-      const marko = result;
-      Software.find(softwareProps, (err, result) => {
-        if (err) {
-          res.send({'error': err});
-        } else {
-          const software = result;
-          marko.createE(Uses, usesProps, software, (err, result) => {
-            if(err) {
-              res.send({'error': err});
-            } else {
-              res.send(result);
-            }
-          });
-        }
-      });
-    }
-  });
-  */
-}
+  // Person.find(personProps, (err, result) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.send({'error': err});
+  //   } else {
+  //     const marko = result;
+  //     Software.find(softwareProps, (err, result) => {
+  //       if (err) {
+  //         console.log(err);
+  //         res.send({'error': err});
+  //       } else {
+  //         const software = result;
+  //         marko.createEdge('uses', software);
+  //       }
+  //     });
+  //   }
+  // });
+  }
 
 personController.findFriends = (req, res) => {
   // localhost:3000/person/friends?key=id&value=<PERSON_ID>&rel=knows
@@ -116,34 +108,34 @@ personController.findFriends = (req, res) => {
   let depth = 1;
   if (req.query.depth) depth = parseInt(req.query.depth)
 
-  Person.findAll(props).findE(relation, {}, depth, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.send(err);
-    }
-    else {
-      res.send(result);
-    }
-  });
-  // Person.findAll(props, (err, result) => {
+  // Person.findAll(props).findEdge(relation, {}, depth, (err, result) => {
   //   if (err) {
   //     console.log(err);
   //     res.send(err);
   //   }
   //   else {
-  //     let people = result;
-  //     console.log(people);
-  //     people.findE(relation, {}, depth, (err, result) => {
-  //       if (err) {
-  //         console.log(err);
-  //         res.send(err);
-  //       }
-  //       else {
-  //         res.send(result);
-  //       }
-  //     });
+  //     res.send(result);
   //   }
   // });
+  Person.findAll(props, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      let people = result;
+      console.log(people);
+      people.findEdge(relation, {}, depth, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        else {
+          res.send(result);
+        }
+      });
+    }
+  });
 
 }
 
