@@ -11,7 +11,6 @@ personController.createPerson = (req, res) => {
   });
   Person.create(props, (err, result) => {
     if (err) {
-      console.log('ERROR', err);
       res.send(err);
     }
     else {
